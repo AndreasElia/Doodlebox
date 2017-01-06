@@ -12,13 +12,14 @@ class Doodle extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'image'
     ];
 
     protected $hidden = [
         'user_id',
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
 
     public function user()

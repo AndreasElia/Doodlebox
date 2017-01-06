@@ -12,7 +12,7 @@ class DoodleComment extends Model
     protected $fillable = [
         'doodle_id',
         'user_id',
-        'message',
+        'message'
     ];
 
     protected $hidden = [
@@ -20,7 +20,7 @@ class DoodleComment extends Model
         'user_id',
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
 
     public function doodle()

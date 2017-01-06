@@ -31,7 +31,7 @@
 
 
                             <div class="form-group">
-                                <label for="password_confirmation">Password Confirmation</label>
+                                <label for="password_confirmation">Password confirmation</label>
                                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" v-model="form.password_confirmation">
                             </div>
 

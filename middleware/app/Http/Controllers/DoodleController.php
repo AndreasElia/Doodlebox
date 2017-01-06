@@ -51,7 +51,8 @@ class DoodleController extends Controller
 
         $doodle = Doodle::create($request->only(
             'user_id',
-            'name'
+            'name',
+            'image'
         ));
 
         if ($doodle) {
@@ -114,7 +115,8 @@ class DoodleController extends Controller
         if ($doodle->count() > 0) {
             $doodle = $doodle->update($request->only(
                 'user_id',
-                'name'
+                'name',
+                'image'
             ));
 
             if ($doodle) {
