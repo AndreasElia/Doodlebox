@@ -1,0 +1,21 @@
+@mixin open-sans($weight: 400, $size: 1em, $color: $text) {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: $weight;
+    font-size: $size;
+    color: $color;
+}
+
+@mixin comfortaa($weight: 700, $size: 1em, $color: $text) {
+    font-family: 'Comfortaa', cursive;
+    font-weight: $weight;
+    font-size: $size;
+    color: $color;
+}
+
+
+@mixin roboto($weight: 700, $size: 1em, $color: $text) {
+    font-family: 'Roboto', sans-serif;
+    font-weight: $weight;
+    font-size: $size;
+    color: $color;
+}

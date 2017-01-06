@@ -1,0 +1,43 @@
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background: $body-bg;
+    @include open-sans(400, 15px/20px, $text);
+    -webkit-font-smoothing: antialiased;
+}
+
+pre {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.footer {
+    margin-bottom: 20px;
+
+    ul {
+        &.list-inline {
+            li {
+                a {
+                    @include open-sans(700, 12px, rgba(0, 0, 0, 0.5));
+                    text-decoration: none;
+
+                    &:active,
+                    &:focus,
+                    &:hover {
+                        color: $text;
+                    }
+
+                    @media (max-width: 768px) {
+                        font-size: 14px;
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    line-height: 28px;
+                    display: block;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.row-eq-height {
+    display: flex;
+}
+
+.v-align {
+    @extend .row-eq-height;
+    align-items: center;
+}
+
+.h-align {
+    @extend .row-eq-height;
+    justify-content: center;
+}
+
+.h-r-align {
+    @extend .row-eq-height;
+    justify-content: flex-end;
+}

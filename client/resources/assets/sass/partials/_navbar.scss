@@ -1,0 +1,55 @@
+.navbar {
+    &.navbar-default {
+        background: $nav-bg;
+        color: $white;
+
+        .navbar-nav {
+            > li {
+                &.active {
+                    > a {
+                        background: none;
+                        color: rgba(255, 255, 255, 0.5);
+
+                        &:active,
+                        &:focus,
+                        &:hover {
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                    }
+                }
+
+                > a {
+                    @include open-sans(700, 0.9em, $white);
+
+                    &:active,
+                    &:focus,
+                    &:hover {
+                        color: rgba(255, 255, 255, 0.5);
+                    }
+                }
+            }
+        }
+
+        .navbar-toggle {
+            background: rgba(0, 0, 0, 0.25);
+            border: none;
+
+            span:first-child {
+                @include open-sans(700, 0.9em, $white);
+            }
+
+            .icon-bar {
+                background: $white;
+            }
+        }
+
+        .navbar-collapse {
+            border-color: $white;
+            box-shadow: none;
+        }
+
+        .navbar-brand {
+            @include comfortaa(700, 1.3em, $white);
+        }
+    }
+}
