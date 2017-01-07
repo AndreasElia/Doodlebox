@@ -76,3 +76,9 @@
         }
     }
 </script>
+
+<style lang="sass" scoped>
+    .btn {
+        width: 100%;
+    }
+</style>

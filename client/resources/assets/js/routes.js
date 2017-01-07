@@ -22,6 +22,10 @@ module.exports = [{
     name: 'details',
     component: require('./components/users/Details.vue')
 }, {
+    path: '/doodles',
+    name: 'doodles',
+    component: require('./components/doodles/Create.vue')
+}, {
     path: '*',
     name: '404',
     component: require('./components/errors/404.vue')
