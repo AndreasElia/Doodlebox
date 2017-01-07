@@ -26,6 +26,14 @@
                                 <a>Register</a>
                             </router-link>
 
+                            <router-link tag="li" :to="{ name: 'doodles' }" v-if="this.$root.user" exact>
+                                <a>Doodles</a>
+                            </router-link>
+
+                            <router-link tag="li" :to="{ name: 'create-doodle' }" v-if="this.$root.user" exact>
+                                <a>Create a Doodle</a>
+                            </router-link>
+
                             <router-link tag="li" :to="{ name: 'details' }" v-if="this.$root.user" exact>
                                 <a>My Details</a>
                             </router-link>

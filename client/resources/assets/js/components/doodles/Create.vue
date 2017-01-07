@@ -6,36 +6,52 @@
                     <div class="panel-heading">Create a Doodle</div>
 
                     <div class="panel-body">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" v-model="form.name" class="form-control">
+                        </div>
+
+                        <hr>
+
                         <div class="row">
-                            <div class="col-sm-2 form-group">
-                                <select id="selSize" class="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="4" selected>4</option>
-                                    <option value="6">6</option>
-                                    <option value="8">8</option>
-                                    <option value="10">10</option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-2 form-group">
-                                <select id="selColour" class="form-control">
-                                    <option value="#0a0a0a" selected>Black</option>
-                                    <option value="#7a7a7a">Grey</option>
-                                    <option value="#ffffff">White</option>
-                                    <option value="#3273dc">Blue</option>
-                                    <option value="#23d160">Green</option>
-                                    <option value="#ff470f">Orange</option>
-                                    <option value="#b86bff">Purple</option>
-                                    <option value="#ff3860">Red</option>
-                                    <option value="#00d1b2">Turquoise</option>
-                                    <option value="#ffdd57">Yellow</option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-8 form-group text-right">
+                            <div class="col-sm-6 form-group">
                                 <button class="btn btn-danger" @click="clearCanvas">Clear</button>
-                                <button class="btn btn-success" @click="clearCanvas">Submit</button>
+                            </div>
+
+                            <div class="col-sm-6 form-group text-right">
+                                <button class="btn btn-success" @click="submit">Save</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="selSize">Size</label>
+                                    <select id="selSize" class="form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="4" selected>4</option>
+                                        <option value="6">6</option>
+                                        <option value="8">8</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="selColour">Colour</label>
+                                    <select id="selColour" class="form-control">
+                                        <option value="#0a0a0a" selected>Black</option>
+                                        <option value="#7a7a7a">Grey</option>
+                                        <option value="#ffffff">White</option>
+                                        <option value="#3273dc">Blue</option>
+                                        <option value="#23d160">Green</option>
+                                        <option value="#ff470f">Orange</option>
+                                        <option value="#b86bff">Purple</option>
+                                        <option value="#ff3860">Red</option>
+                                        <option value="#00d1b2">Turquoise</option>
+                                        <option value="#ffdd57">Yellow</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -67,7 +83,13 @@
                 isMouseDown: false,
                 offset: { top: 0, left: 0 },
                 last: { x: 0, y: 0 },
-                points: []
+                points: [],
+                total_points: [],
+
+                form: {
+                    name: null,
+                    image: null
+                }
             }
         },
         methods: {
@@ -127,6 +149,8 @@
             mouseUp: function (e) {
                 this.isMouseDown = false;
 
+                this.total_points = this.total_points.concat(this.points);
+
                 this.points = [];
             },
             getColour: function () {
@@ -146,6 +170,9 @@
                 }
 
                 return e.options[e.selectedIndex].value;
+            },
+            submit: function () {
+                console.log(this.total_points);
             }
         },
         computed: {
