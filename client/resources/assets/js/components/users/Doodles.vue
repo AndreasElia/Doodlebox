@@ -5,7 +5,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ (user != null) ? user.first_name : '' }}'s Doodles</div>
 
-                    <div class="panel-body">
+                    <div class="panel-body text-center">
                         <doodle-preview v-for="doodle in doodles" v-bind:doodle="doodle"></doodle-preview>
 
                         <paginate v-bind:pagination="pagination"></paginate>

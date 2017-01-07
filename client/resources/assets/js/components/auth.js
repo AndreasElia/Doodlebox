@@ -2,6 +2,7 @@ export default {
     checkAuth: function (vm) {
         if (localStorage.getItem('access_token') !== null) {
             vm.$http.get(window.api + '/user').then((response) => {
+                console.log('hi', response);
                 if (response.data.status == 'success') {
                     vm.user = response.data.user;
                 }

@@ -105,7 +105,7 @@
                 margin: 0 auto;
             }
 
-            &:nth-child(5n+5) {
+            &:nth-child(4n+1) {
                 margin: 0 auto;
             }
 

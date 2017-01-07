@@ -1,5 +1,5 @@
 <template>
-    <nav class="text-right">
+    <nav class="row text-right">
         <div class="col-xs-12 col-sm-1 form-group" style="margin: 22px 0;">
             <select class="form-control" v-model="pagination_limit">
                 <option value="5">5</option>
@@ -79,3 +79,9 @@
         }
     }
 </script>
+
+<style lang="sass" scoped>
+    .pagination {
+        padding-left: 15px;
+    }
+</style>

@@ -17,8 +17,10 @@ class UserController extends Controller
      */
     public function user(Request $request)
     {
+        $user['id'] = $request->user()->id;
         $user['first_name'] = $request->user()->first_name;
         $user['last_name'] = $request->user()->last_name;
+        $user['email'] = $request->user()->email;
 
         return response()->json([
             'status' => 'success',

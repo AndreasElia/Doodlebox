@@ -162,13 +162,16 @@ class DoodleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $page
      * @param  int  $limit
-     * @param  string  $order
      * @param  string  $search
      * @return \Illuminate\Http\Response
      */
-    public function all(Request $request, $page = 1, $limit = 10, $order = 'desc', $search = null)
+    public function all(Request $request, $page = 1, $limit = 10, $search = null)
     {
-        $doodles = Doodle::orderBy('created_at', $order);
+        if ($request->has('order')) {
+            $doodles = Doodle::orderBy('created_at', $request->get('order'));
+        } else {
+            $doodles = Doodle::orderBy('created_at', 'desc');
+        }
 
         if ($search != null) {
             $search = urldecode($search);
