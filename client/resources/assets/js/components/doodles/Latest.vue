@@ -6,7 +6,7 @@
                     <div class="panel-heading">Latest Doodles</div>
 
                     <div class="panel-body">
-                        <canvas id="game"></canvas>
+                        <doodle-preview v-for="doodle in doodles" v-bind:doodle="doodle"></doodle-preview>
                     </div>
 
                 </div>
@@ -19,91 +19,22 @@
     export default {
         data() {
             return {
-                gameElm: 'game',
-                colourElm: 'selColour',
-                sizeElm: 'selSize',
-                selectedColour: null,
-
-                container: null,
-
-                canvas: null,
-                ctx: null,
-                width: null,
-                height: null,
-
-                isMouseDown: false,
-                offset: { top: 0, left: 0 },
-                last: { x: 0, y: 0 },
-                points: [],
-                total_points: [],
-
-                form: {
-                    name: null,
-                    image: null
-                },
-                errors: null
-            }
-        },
-        methods: {
-            pointsToCanvas: function (colour, size, points) {
-                this.ctx.beginPath();
-                this.ctx.lineJoin = this.ctx.lineCap = 'round';
-                this.ctx.moveTo(points[0].x, points[0].y);
-
-                for (var i = 1; i < points.length; i++) {
-                    this.ctx.strokeStyle = colour;
-                    this.ctx.lineWidth = size;
-                    this.ctx.lineTo(points[i].x, points[i].y);
-                }
-
-                this.ctx.stroke();
-            },
-            drawFromStream: function (points) {
-                if (! points || points.length <= 0) {
-                    return;
-                }
-
-                this.pointsToCanvas('black', '10', points);
-            },
-            resetCanvas: function () {
-                this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-                this.ctx.fillStyle = '#fff';
-                this.ctx.fillRect(0, 0, this.width, this.height);
-            }
-        },
-        computed: {
-            backgroundStyle: function () {
-                return this.selectedColour == null ? '#fff' : this.selectedColour;
+                doodles: []
             }
         },
         mounted() {
-            this.canvas = document.getElementById(this.gameElm);
-            this.ctx = this.canvas.getContext('2d');
-
-            this.container = document.getElementById(this.gameElm);
-
-            this.width = this.container.clientWidth;
-            this.height = this.container.clientHeight;
-
-            this.canvas.node = this.canvas;
-            this.canvas.node.width = this.width;
-            this.canvas.node.height = this.height;
-
-            this.resetCanvas();
-
-            var rect = this.container.getBoundingClientRect();
-
-            this.offset.top = rect.top + document.body.scrollTop;
-            this.offset.left = rect.left + document.body.scrollLeft;
-
             this.$http.get(
-                window.api + '/doodles/latest/5'
+                window.api + '/doodles/latest/4'
             ).then((response) => {
                 if (response.data.status == 'success') {
-                    response.data.doodles.forEach(function (item, index) {
-                        console.log(index);
+                    var doodles = [];
+
+                    response.data.doodles.forEach(function (doodle, index) {
+                        doodle.image = JSON.parse(doodle.image);
+                        doodles[index] = doodle;
                     });
-                    console.log('latest 5 doodles', response.data);
+
+                    this.doodles = doodles;
                 }
 
                 if (response.data.status == 'error') {
@@ -113,14 +44,3 @@
         }
     }
 </script>
-
-<style lang="sass" scoped>
-    #game {
-        width: 200px;
-        height: 150px;
-        margin: 0 auto;
-        display: block;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 3px;
-    }
-</style>

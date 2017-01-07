@@ -163,7 +163,7 @@ class DoodleController extends Controller
      */
     public function latest(Request $request, $amount = 10)
     {
-        $doodles = Doodle::orderBy('created_at', 'desc')
+        $doodles = Doodle::orderBy('created_at', 'asc')
             ->take($amount)
             ->get();
 
