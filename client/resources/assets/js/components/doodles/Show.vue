@@ -6,7 +6,7 @@
                     <div class="panel-heading">View a Doodle</div>
 
                     <div class="panel-body">
-                        <canvas id="game" @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp"></canvas>
+                        <canvas id="game"></canvas>
                     </div>
 
                 </div>
@@ -45,20 +45,6 @@
             }
         },
         methods: {
-            draw: function (x, y, isActive) {
-                if (isActive) {
-                    this.points.push({ x: x, y: y });
-
-                    this.pointsToCanvas(this.getColour(), this.getSize(), this.points);
-                }
-
-                this.last.x = x;
-                this.last.y = y;
-
-                this.points.push({ x: x, y: y });
-
-                this.pointsToCanvas(this.getColour(), this.getSize(), this.points);
-            },
             pointsToCanvas: function (colour, size, points) {
                 this.ctx.beginPath();
                 this.ctx.lineJoin = this.ctx.lineCap = 'round';
@@ -83,45 +69,6 @@
                 this.ctx.setTransform(1, 0, 0, 1, 0, 0);
                 this.ctx.fillStyle = '#fff';
                 this.ctx.fillRect(0, 0, this.width, this.height);
-            },
-            clearCanvas: function () {
-                this.resetCanvas();
-            },
-            mouseDown: function (e) {
-                this.isMouseDown = true;
-
-                this.last.x = e.pageX - this.offset.left;
-                this.last.y = e.pageY - this.offset.top;
-            },
-            mouseMove: function (e) {
-                if (this.isMouseDown) {
-                    this.draw(e.pageX - this.offset.left, e.pageY - this.offset.top, true);
-                }
-            },
-            mouseUp: function (e) {
-                this.isMouseDown = false;
-
-                this.total_points = this.total_points.concat(this.points);
-
-                this.points = [];
-            },
-            getColour: function () {
-                var e = document.getElementById(this.colourElm);
-
-                if (e == undefined) {
-                    return;
-                }
-
-                return e.options[e.selectedIndex].value;
-            },
-            getSize: function () {
-                var e = document.getElementById(this.sizeElm);
-
-                if (e == undefined) {
-                    return;
-                }
-
-                return e.options[e.selectedIndex].value;
             }
         },
         computed: {
