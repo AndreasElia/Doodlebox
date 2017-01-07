@@ -30,6 +30,10 @@ Route::group(['middleware' => 'api'], function () {
             Route::put('details', 'UserController@details');
         });
 
+        Route::group(['prefix' => 'doodles'], function () {
+            Route::get('latest/{amount?}', 'DoodleController@latest');
+        });
+
         Route::resource('doodles', 'DoodleController');
     });
 });

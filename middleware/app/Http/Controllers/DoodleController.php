@@ -153,4 +153,29 @@ class DoodleController extends Controller
             'status' => 'error'
         ]);
     }
+
+    /**
+     * Get the latest of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $amount
+     * @return \Illuminate\Http\Response
+     */
+    public function latest(Request $request, $amount = 10)
+    {
+        $doodles = Doodle::orderBy('created_at', 'desc')
+            ->take($amount)
+            ->get();
+
+        if ($doodles) {
+            return response()->json([
+                'status' => 'success',
+                'doodles' => $doodles
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error'
+        ]);
+    }
 }

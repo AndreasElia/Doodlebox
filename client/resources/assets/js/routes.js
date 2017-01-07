@@ -4,7 +4,10 @@ module.exports = [{
 }, {
     path: '/home',
     name: 'home',
-    component: require('./components/Home.vue')
+    component: require('./components/Home.vue'),
+    meta: {
+        showLatest: true
+    }
 }, {
     path: '/login',
     name: 'login',
