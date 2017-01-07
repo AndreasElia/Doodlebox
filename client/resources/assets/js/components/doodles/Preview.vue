@@ -1,5 +1,8 @@
 <template>
-    <canvas id="game"></canvas>
+    <router-link :to="{ name: 'show-doodle', params: { id: doodle.id }}">
+        <canvas id="game"></canvas>
+        <h5>{{ doodle.name }}</h5>
+    </router-link>
 </template>
 
 <script>
@@ -80,6 +83,8 @@
 
             this.offset.top = rect.top + document.body.scrollTop;
             this.offset.left = rect.left + document.body.scrollLeft;
+
+            this.doodle.image = JSON.parse(this.doodle.image);
 
             this.doodle.image.forEach(function (item, index) {
                 item.x = item.x / 4;

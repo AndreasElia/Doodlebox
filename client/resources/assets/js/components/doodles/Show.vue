@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">View a Doodle</div>
+                    <div class="panel-heading">{{ (doodle != null) ? doodle.name : '' }}</div>
 
                     <div class="panel-body">
                         <canvas id="game"></canvas>
@@ -37,11 +37,7 @@
                 points: [],
                 total_points: [],
 
-                form: {
-                    name: null,
-                    image: null
-                },
-                errors: null
+                doodle: null
             }
         },
         methods: {
@@ -100,9 +96,8 @@
                 window.api + '/doodles/' + this.$route.params.id
             ).then((response) => {
                 if (response.data.status == 'success') {
-                    this.form.name = response.data.doodle.name;
-                    this.form.total_points = JSON.parse(response.data.doodle.image);
-                    this.drawFromStream(JSON.parse(response.data.doodle.image));
+                    this.doodle = response.data.doodle;
+                    this.drawFromStream(JSON.parse(this.doodle.image));
                 }
 
                 if (response.data.status == 'error') {

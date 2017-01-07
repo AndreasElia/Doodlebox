@@ -27,14 +27,7 @@
                 window.api + '/doodles/latest/4'
             ).then((response) => {
                 if (response.data.status == 'success') {
-                    var doodles = [];
-
-                    response.data.doodles.forEach(function (doodle, index) {
-                        doodle.image = JSON.parse(doodle.image);
-                        doodles[index] = doodle;
-                    });
-
-                    this.doodles = doodles;
+                    this.doodles = response.data.doodles;
                 }
 
                 if (response.data.status == 'error') {
