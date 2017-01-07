@@ -11,7 +11,7 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <router-link :to="{ name: 'home' }">
+                        <router-link :to="{ name: 'doodles' }">
                             <a class="navbar-brand">Doodlebox</a>
                         </router-link>
                     </div>
@@ -27,7 +27,11 @@
                             </router-link>
 
                             <router-link tag="li" :to="{ name: 'doodles' }" v-if="this.$root.user" exact>
-                                <a>Doodles</a>
+                                <a>All Doodles</a>
+                            </router-link>
+
+                            <router-link tag="li" :to="{ name: 'user-doodles', params: { id: this.$root.user.id }}" v-if="this.$root.user" exact>
+                                <a>My Doodles</a>
                             </router-link>
 
                             <router-link tag="li" :to="{ name: 'create-doodle' }" v-if="this.$root.user" exact>

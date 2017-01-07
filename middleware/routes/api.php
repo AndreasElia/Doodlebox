@@ -31,7 +31,7 @@ Route::group(['middleware' => 'api'], function () {
         });
 
         Route::group(['prefix' => 'doodles'], function () {
-            Route::get('latest/{amount?}', 'DoodleController@latest');
+            Route::get('all/{page?}/{limit?}/{order?}/{search?}', 'DoodleController@all');
         });
 
         Route::resource('doodles', 'DoodleController');

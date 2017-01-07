@@ -1,13 +1,6 @@
 module.exports = [{
     path: '/',
-    redirect: { path: '/home' }
-}, {
-    path: '/home',
-    name: 'home',
-    component: require('./components/Home.vue'),
-    meta: {
-        showLatest: true
-    }
+    redirect: { path: '/doodles' }
 }, {
     path: '/login',
     name: 'login',
@@ -43,6 +36,18 @@ module.exports = [{
         path: ':id/edit',
         name: 'edit-doodle',
         component: require('./components/doodles/Edit.vue')
+    }]
+}, {
+    path: '/users',
+    component: require('./components/users/Users.vue'),
+    children: [{
+        path: '/',
+        name: 'users',
+        redirect: { path: '/home' }
+    }, {
+        path: ':id/doodles',
+        name: 'user-doodles',
+        component: require('./components/users/Doodles.vue')
     }]
 }, {
     path: '*',

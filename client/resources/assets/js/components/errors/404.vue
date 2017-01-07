@@ -8,7 +8,7 @@
                     <div class="panel-body text-center">
                         <p>Oops. The page you were looking for doesn't exist.</p>
 
-                        <router-link :to="'home'">
+                        <router-link :to="'doodles'">
                             <a>Take me back to the home page</a>
                         </router-link>
                     </div>

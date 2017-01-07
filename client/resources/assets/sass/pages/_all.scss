@@ -12,6 +12,14 @@ pre {
     background: rgba(0, 0, 0, 0.05);
 }
 
+a {
+    &.preview {
+        h5 {
+            @include open-sans(700, 12px, $text);
+        }
+    }
+}
+
 .footer {
     margin-bottom: 20px;
 

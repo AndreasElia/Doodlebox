@@ -31,8 +31,6 @@
         <div id="app">
             <app-header></app-header>
 
-            <latest-doodles v-if="this.$route.meta.showLatest"></latest-doodles>
-
             <router-view></router-view>
 
             <app-footer></app-footer>

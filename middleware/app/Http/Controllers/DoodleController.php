@@ -178,4 +178,31 @@ class DoodleController extends Controller
             'status' => 'error'
         ]);
     }
+
+    public function all(Request $request, $page = 1, $limit = 10, $order = 'desc', $search = null)
+    {
+        $doodles = Doodle::orderBy('created_at', $order);
+
+        if ($search != null) {
+            $search = urldecode($search);
+
+            $doodles = $doodles->where('name', 'LIKE', '%' . $search . '%');
+        }
+
+        $all_doodles = $doodles->take($limit)
+            ->skip(($page * $limit) - $limit)
+            ->get();
+
+        if ($all_doodles) {
+            return response()->json([
+                'status' => 'success',
+                'doodles' => $all_doodles,
+                'count' => $doodles->count()
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error'
+        ]);
+    }
 }

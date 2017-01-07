@@ -49,7 +49,6 @@
                 if (! points || points.length <= 0) {
                     return;
                 }
-                console.log(points);
 
                 this.pointsToCanvas('black', '10', points);
             },
@@ -96,21 +95,31 @@
     }
 </script>
 
-<style lang="sass" scoped>
-    .preview {
-        display: inline-block;
-        margin: 0 auto 0 15px;
-
-        &:first-of-type {
-            margin: 0 auto;
-        }
-
-        .game {
-            width: 200px;
-            height: 150px;
+<style lang="sass">
+    a {
+        &.preview {
             display: inline-block;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
+            margin: 0 auto 0 15px;
+
+            &:first-of-type {
+                margin: 0 auto;
+            }
+
+            &:nth-child(5n+5) {
+                margin: 0 auto;
+            }
+
+            .game {
+                width: 200px;
+                height: 150px;
+                display: inline-block;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 3px;
+            }
+
+            h5 {
+                margin: 0 0 15px;
+            }
         }
     }
 </style>
