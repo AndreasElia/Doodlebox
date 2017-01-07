@@ -17,7 +17,7 @@ class CreateDoodlesTable extends Migration
             $table->increments('id');
             $table->tinyInteger('user_id');
             $table->string('name');
-            $table->binary('image');
+            $table->json('image');
             $table->timestamps();
             $table->softDeletes();
         });
