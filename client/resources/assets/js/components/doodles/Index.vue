@@ -8,7 +8,7 @@
                     <div class="panel-body">
                         <doodle-preview v-for="doodle in doodles" v-bind:doodle="doodle"></doodle-preview>
 
-                        <paginate v-bind:pagination="pagination" v-show="! loading"></paginate>
+                        <paginate v-bind:pagination="pagination"></paginate>
                     </div>
                 </div>
             </div>
@@ -41,8 +41,6 @@
                 this.loading = true;
 
                 this.$http.get(window.api + '/doodles/all/' + this.pagination.page + '/' + this.pagination.limit).then((response) => {
-                    this.loading = false;
-
                     if (response.data.status == 'success') {
                         this.doodles = response.data.doodles;
 

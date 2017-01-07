@@ -25,11 +25,11 @@ class DoodleComment extends Model
 
     public function doodle()
     {
-        return $this->belongsTo('Doodle');
+        return $this->belongsTo('App\Doodle');
     }
 
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\User');
     }
 }

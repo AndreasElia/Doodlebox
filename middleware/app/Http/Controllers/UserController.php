@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Doodle;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserDetailRequest;
 
@@ -58,5 +59,19 @@ class UserController extends Controller
         return response()->json([
             'status' => 'error'
         ]);
+    }
+
+    public function doodles($user_id)
+    {
+        $user = User::where('id', $user_id)
+            ->with('doodles')
+            ->first();
+
+        if ($user) {
+            return response()->json([
+                'status' => 'success',
+                'user' => $user
+            ]);
+        }
     }
 }

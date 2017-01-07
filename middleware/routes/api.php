@@ -28,6 +28,7 @@ Route::group(['middleware' => 'api'], function () {
 
         Route::group(['prefix' => 'users'], function () {
             Route::put('details', 'UserController@details');
+            Route::get('doodles/{user_id}', 'UserController@doodles');
         });
 
         Route::group(['prefix' => 'doodles'], function () {

@@ -24,11 +24,11 @@ class Doodle extends Model
 
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('App\User');
     }
 
     public function comments()
     {
-        return $this->hasMany('DoodleComments');
+        return $this->hasMany('App\DoodleComment');
     }
 }
