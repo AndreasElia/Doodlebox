@@ -6,6 +6,8 @@
                     <div class="panel-heading">Create a Doodle</div>
 
                     <div class="panel-body">
+                        <errors v-bind:errors="errors"></errors>
+
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" name="name" id="name" v-model="form.name" class="form-control">
@@ -89,7 +91,8 @@
                 form: {
                     name: null,
                     image: null
-                }
+                },
+                errors: null
             }
         },
         methods: {
@@ -172,7 +175,21 @@
                 return e.options[e.selectedIndex].value;
             },
             submit: function () {
-                console.log(this.total_points);
+                this.form.image = this.total_points;
+
+                this.$http.post(
+                    window.api + '/doodles',
+                    this.form
+                ).then((response) => {
+                    if (response.data.status == 'success') {
+                        // temporary redirect, will redirect to doodle in future
+                        this.$router.push({ name: 'home' });
+                    }
+
+                    if (response.data.status == 'error') {
+                        this.errors = response.data.errors;
+                    }
+                });
             }
         },
         computed: {

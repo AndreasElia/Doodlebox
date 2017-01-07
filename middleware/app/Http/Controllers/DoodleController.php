@@ -48,6 +48,7 @@ class DoodleController extends Controller
     public function store(Request $request)
     {
         $request['user_id'] = $request->user()->id;
+        $request['image'] = json_encode($request->get('image'));
 
         $doodle = Doodle::create($request->only(
             'user_id',
@@ -109,6 +110,7 @@ class DoodleController extends Controller
     public function update(Request $request, $id)
     {
         $request['user_id'] = $request->user()->id;
+        $request['image'] = json_encode($request->get('image'));
 
         $doodle = Doodle::where('id', $id);
 
