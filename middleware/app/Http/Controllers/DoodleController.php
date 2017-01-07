@@ -58,7 +58,8 @@ class DoodleController extends Controller
 
         if ($doodle) {
             return response()->json([
-                'status' => 'success'
+                'status' => 'success',
+                'doodle' => $doodle
             ]);
         }
 
@@ -123,7 +124,8 @@ class DoodleController extends Controller
 
             if ($doodle) {
                 return response()->json([
-                    'status' => 'success'
+                    'status' => 'success',
+                    'doodle' => $doodle
                 ]);
             }
         }
@@ -155,30 +157,15 @@ class DoodleController extends Controller
     }
 
     /**
-     * Get the latest of the resource.
+     * Get the all of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $amount
+     * @param  int  $page
+     * @param  int  $limit
+     * @param  string  $order
+     * @param  string  $search
      * @return \Illuminate\Http\Response
      */
-    public function latest(Request $request, $amount = 10)
-    {
-        $doodles = Doodle::orderBy('created_at', 'desc')
-            ->take($amount)
-            ->get();
-
-        if ($doodles) {
-            return response()->json([
-                'status' => 'success',
-                'doodles' => $doodles
-            ]);
-        }
-
-        return response()->json([
-            'status' => 'error'
-        ]);
-    }
-
     public function all(Request $request, $page = 1, $limit = 10, $order = 'desc', $search = null)
     {
         $doodles = Doodle::orderBy('created_at', $order);

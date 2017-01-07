@@ -54,7 +54,7 @@
 
                         this.$root.user = response.data.user;
 
-                        this.$router.push({ name: 'home' });
+                        this.$router.push({ name: 'doodles' });
                     }
 
                     if (response.data.status == 'error') {

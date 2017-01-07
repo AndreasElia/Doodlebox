@@ -182,8 +182,7 @@
                     this.form
                 ).then((response) => {
                     if (response.data.status == 'success') {
-                        // temporary redirect, will redirect to doodle in future
-                        this.$router.push({ name: 'home' });
+                        this.$router.push({ name: 'show-doodle', params: { id: response.data.doodle.id } });
                     }
 
                     if (response.data.status == 'error') {

@@ -68,7 +68,7 @@
                         this.$root.user.first_name = response.data.user.first_name;
                         this.$root.user.last_name = response.data.user.last_name;
 
-                        this.$router.push({ name: 'home' });
+                        this.$router.push({ name: 'doodles' });
                     }
 
                     if (response.data.status == 'error') {

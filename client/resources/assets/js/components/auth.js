@@ -19,7 +19,7 @@ export default {
 
                 vm.user = null;
 
-                router.push({ name: 'home' });
+                router.push({ name: 'doodles' });
             }
         });
     }
