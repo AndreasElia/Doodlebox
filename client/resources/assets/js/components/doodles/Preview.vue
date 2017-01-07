@@ -1,6 +1,6 @@
 <template>
-    <router-link :to="{ name: 'show-doodle', params: { id: doodle.id }}">
-        <canvas id="game"></canvas>
+    <router-link :to="{ name: 'show-doodle', params: { id: doodle.id }}" class="preview text-center">
+        <canvas class="game" v-bind:id="'game-' + doodle.id"></canvas>
         <h5>{{ doodle.name }}</h5>
     </router-link>
 </template>
@@ -9,7 +9,7 @@
     export default {
         data() {
             return {
-                gameElm: 'game',
+                gameElm: 'game-' + this.doodle.id,
                 colourElm: 'selColour',
                 sizeElm: 'selSize',
                 selectedColour: null,
@@ -97,12 +97,20 @@
 </script>
 
 <style lang="sass" scoped>
-    #game {
-        width: 200px;
-        height: 150px;
-        margin: 0 auto 0 15px;
+    .preview {
         display: inline-block;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 3px;
+        margin: 0 auto 0 15px;
+
+        &:first-of-type {
+            margin: 0 auto;
+        }
+
+        .game {
+            width: 200px;
+            height: 150px;
+            display: inline-block;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
     }
 </style>
