@@ -12,10 +12,8 @@
                             </div>
 
                             <div class="col-sm-8 text-right">
-                                <router-link :to="{ name: 'edit-doodle', params: { id: this.$route.params.id } }" exact>
-                                    <button class="btn btn-info">Edit</button>
-                                </router-link>
-                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-info" @click="doodleEdit">Edit</button>
+                                <button class="btn btn-danger" @click="doodleDelete">Delete</button>
                             </div>
                         </div>
 
@@ -53,6 +51,18 @@
             }
         },
         methods: {
+            doodleEdit: function () {
+                this.$router.push({ name: 'edit-doodle', params: { id: this.$route.params.id } });
+            },
+            doodleDelete: function () {
+                this.$http.delete(
+                    window.api + '/doodles/' + this.$route.params.id
+                ).then((response) => {
+                    if (response.data.status == 'success') {
+                        this.$router.push({ name: 'doodles' });
+                    }
+                });
+            },
             validUser: function () {
                 if (this.doodle != null && this.$root.user != null) {
                     return (this.doodle.user_id == this.$root.user.id);
