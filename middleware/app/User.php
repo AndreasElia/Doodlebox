@@ -35,4 +35,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Doodle');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\DoodleComment');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\DoodleRating');
+    }
 }

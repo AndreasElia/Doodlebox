@@ -71,10 +71,11 @@ class DoodleController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $doodle = Doodle::where('id', $id)
             ->with('comments.user', 'ratings')
@@ -82,6 +83,7 @@ class DoodleController extends Controller
 
         if ($doodle) {
             $doodle->rating = $doodle->ratings()->avg('rating');
+            $doodle->user_rating = $doodle->ratings()->where('user_id', $request->user()->id)->first();
 
             return response()->json([
                 'status' => 'success',

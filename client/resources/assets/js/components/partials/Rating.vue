@@ -1,6 +1,6 @@
 <template>
     <div class="star-rating">
-        <label class="star" v-for="rating in ratings" v-bind:class="{'is-selected': (value >= rating && value != null), 'is-disabled': disabled}" @click="set(rating)" v-on:mouseover="star_over(rating)" v-on:mouseout="star_out">
+        <label class="star" v-for="rating in ratings" v-bind:class="{ 'is-selected': (value >= rating && value != null), 'is-disabled': disabled }" @click="set(rating)" v-on:mouseover="star_over(rating)" v-on:mouseout="star_out">
 
         <input class="star-rating star-rating-checkbox" type="radio" :value="rating" v-model="value" :disabled="disabled">★</label>
     </div>
@@ -10,14 +10,21 @@
     export default {
         data() {
             return {
-                value: null,
                 temp_value: null,
-                ratings: [1, 2, 3, 4, 5]
+                ratings: [1, 2, 3, 4, 5],
+                form: {
+                    doodle_id: null,
+                    rating: null
+                }
             }
         },
         props: {
             'doodle': null,
-            'disabled': Boolean
+            'name': String,
+            'value': null,
+            'id': String,
+            'disabled': Boolean,
+            'required': Boolean
         },
         methods: {
             star_over: function (index) {
@@ -39,8 +46,17 @@
                 var self = this;
 
                 if (! this.disabled) {
-                    // set rating
-                    console.log(this.value);
+                    this.form.doodle_id = this.doodle.id;
+                    this.form.rating = this.value;
+
+                    this.$http.post(
+                        window.api + '/doodle-ratings',
+                        this.form
+                    ).then((response) => {
+                        if (response.data.status == 'success') {
+                            this.doodle = response.data.doodle;
+                        }
+                    });
 
                     this.temp_value = value;
                     return this.value = value;

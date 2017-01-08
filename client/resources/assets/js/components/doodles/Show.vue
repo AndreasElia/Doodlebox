@@ -22,12 +22,12 @@
                         <hr>
 
                         <label>Overall Rating</label>
-                        <rating :doodle="doodle" name="overall_rating"></rating>
+                        <rating :doodle="doodle" :value="(doodle != null) ? doodle.rating : 0" name="overall_rating" :disabled="true"></rating>
 
                         <br>
 
                         <label>Your Rating</label>
-                        <rating :doodle="doodle" name="user_rating" :disabled="true"></rating>
+                        <rating :doodle="doodle" :value="(doodle != null) ? (doodle.user_rating != null) ? doodle.user_rating.rating : 0 : 0" name="user_rating"></rating>
 
                         <hr>
 
