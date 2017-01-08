@@ -6,9 +6,21 @@
                     <div class="panel-heading">{{ (doodle != null) ? doodle.name : '' }}</div>
 
                     <div class="panel-body">
+                        <div class="row" v-if="validUser" style="margin-bottom: 15px;">
+                            <div class="col-sm-4">
+                                <label>Creator Controls</label>
+                            </div>
+
+                            <div class="col-sm-8 text-right">
+                                <router-link :to="{ name: 'edit-doodle', params: { id: this.$route.params.id } }" exact>
+                                    <button class="btn btn-info">Edit</button>
+                                </router-link>
+                                <button class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+
                         <canvas id="game"></canvas>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -41,6 +53,13 @@
             }
         },
         methods: {
+            validUser: function () {
+                if (this.doodle != null && this.$root.user != null) {
+                    return (this.doodle.user_id == this.$root.user.id);
+                }
+
+                return false;
+            },
             pointsToCanvas: function (colour, size, points) {
                 this.ctx.beginPath();
                 this.ctx.lineJoin = this.ctx.lineCap = 'round';

@@ -59,7 +59,6 @@
 
                         <canvas id="game" @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp"></canvas>
                     </div>
-
                 </div>
             </div>
         </div>
