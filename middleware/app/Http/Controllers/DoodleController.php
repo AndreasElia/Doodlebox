@@ -77,10 +77,12 @@ class DoodleController extends Controller
     public function show($id)
     {
         $doodle = Doodle::where('id', $id)
-            ->with('comments')
+            ->with('comments.user', 'ratings')
             ->first();
 
         if ($doodle) {
+            $doodle->rating = $doodle->ratings()->avg('rating');
+
             return response()->json([
                 'status' => 'success',
                 'doodle' => $doodle

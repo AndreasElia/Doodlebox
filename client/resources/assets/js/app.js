@@ -18,6 +18,7 @@ Vue.component('app-footer', require('./components/partials/Footer.vue'));
 Vue.component('errors', require('./components/partials/Errors.vue'));
 Vue.component('doodle-preview', require('./components/doodles/Preview.vue'));
 Vue.component('paginate', require('./components/partials/Paginate.vue'));
+Vue.component('rating', require('./components/partials/Rating.vue'));
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementsByName('csrf-token')[0].getAttribute('content');
 Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');

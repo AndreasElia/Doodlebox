@@ -21,23 +21,35 @@
 
                         <hr>
 
+                        <label>Overall Rating</label>
+                        <rating :doodle="doodle" name="overall_rating"></rating>
+
+                        <br>
+
+                        <label>Your Rating</label>
+                        <rating :doodle="doodle" name="user_rating" :disabled="true"></rating>
+
+                        <hr>
+
                         <div v-if="(doodle != null) ? doodle.comments.length > 0 : ''">
+                            <label>Comments</label>
+
                             <div class="comment" v-for="comment in doodle.comments">
-                                <strong>Andreas (07-01-2016 00:57)</strong>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae blanditiis eius enim esse cumque eligendi voluptatem doloremque libero doloribus debitis animi, corrupti, ex asperiores facilis assumenda, reprehenderit dignissimos laudantium laborum.
-                                </p>
+                                <strong>{{ comment.user.first_name }} ({{ comment.user.created_at }})</strong>
+                                <p>{{ comment.comment }}</p>
                             </div>
 
                             <hr>
                         </div>
 
-                        <div class="form-group">
-                            <label for="comment">Comment</label>
-                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
-                        </div>
+                        <form @submit.prevent="comment" class="comments">
+                            <div class="form-group">
+                                <label for="comment">Comment</label>
+                                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control" v-model="form.comment"></textarea>
+                            </div>
 
-                        <input type="submit" value="Submit" class="btn btn-default">
+                            <input type="submit" value="Submit" class="btn btn-default">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -67,10 +79,27 @@
                 points: [],
                 total_points: [],
 
-                doodle: null
+                doodle: null,
+                validUser: false,
+                form: {
+                    doodle_id: this.$route.params.id,
+                    comment: null
+                }
             }
         },
         methods: {
+            comment: function () {
+                this.$http.post(
+                    window.api + '/doodle-comments',
+                    this.form
+                ).then((response) => {
+                    if (response.data.status == 'success') {
+                        this.form.comment = null;
+                        this.doodle = response.data.doodle;
+                        this.drawFromStream(JSON.parse(this.doodle.image));
+                    }
+                });
+            },
             doodleEdit: function () {
                 this.$router.push({ name: 'edit-doodle', params: { id: this.$route.params.id } });
             },
@@ -82,13 +111,6 @@
                         this.$router.push({ name: 'doodles' });
                     }
                 });
-            },
-            validUser: function () {
-                if (this.doodle != null && this.$root.user != null) {
-                    return (this.doodle.user_id == this.$root.user.id);
-                }
-
-                return false;
             },
             pointsToCanvas: function (colour, size, points) {
                 this.ctx.beginPath();
@@ -149,8 +171,8 @@
                     this.drawFromStream(JSON.parse(this.doodle.image));
                 }
 
-                if (response.data.status == 'error') {
-                    this.errors = response.data.errors;
+                if (this.doodle != null && this.$root.user != null) {
+                    this.validUser = (this.doodle.user_id == this.$root.user.id);
                 }
             });
         }
@@ -165,5 +187,11 @@
         display: block;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 3px;
+    }
+
+    .comments {
+        .btn {
+            width: 100%;
+        }
     }
 </style>

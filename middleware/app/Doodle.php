@@ -15,13 +15,6 @@ class Doodle extends Model
         'image'
     ];
 
-    protected $hidden = [
-        'user_id',
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
-
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -30,5 +23,10 @@ class Doodle extends Model
     public function comments()
     {
         return $this->hasMany('App\DoodleComment');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\DoodleRating');
     }
 }

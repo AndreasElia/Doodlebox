@@ -17,7 +17,7 @@ class CreateDoodleCommentsTable extends Migration
             $table->increments('id');
             $table->tinyInteger('doodle_id');
             $table->tinyInteger('user_id');
-            $table->string('message');
+            $table->string('comment');
             $table->timestamps();
             $table->softDeletes();
         });

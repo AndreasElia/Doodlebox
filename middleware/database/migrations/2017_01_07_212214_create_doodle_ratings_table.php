@@ -19,6 +19,7 @@ class CreateDoodleRatingsTable extends Migration
             $table->tinyInteger('user_id');
             $table->tinyInteger('rating');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

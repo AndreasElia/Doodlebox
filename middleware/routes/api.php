@@ -36,5 +36,7 @@ Route::group(['middleware' => 'api'], function () {
         });
 
         Route::resource('doodles', 'DoodleController');
+
+        Route::resource('doodle-comments', 'DoodleCommentController');
     });
 });
