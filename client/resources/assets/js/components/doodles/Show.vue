@@ -18,6 +18,26 @@
                         </div>
 
                         <canvas id="game"></canvas>
+
+                        <hr>
+
+                        <div v-if="(doodle != null) ? doodle.comments.length > 0 : ''">
+                            <div class="comment" v-for="comment in doodle.comments">
+                                <strong>Andreas (07-01-2016 00:57)</strong>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae blanditiis eius enim esse cumque eligendi voluptatem doloremque libero doloribus debitis animi, corrupti, ex asperiores facilis assumenda, reprehenderit dignissimos laudantium laborum.
+                                </p>
+                            </div>
+
+                            <hr>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment">Comment</label>
+                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                        </div>
+
+                        <input type="submit" value="Submit" class="btn btn-default">
                     </div>
                 </div>
             </div>

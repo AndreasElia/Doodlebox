@@ -76,7 +76,9 @@ class DoodleController extends Controller
      */
     public function show($id)
     {
-        $doodle = Doodle::find($id);
+        $doodle = Doodle::where('id', $id)
+            ->with('comments')
+            ->first();
 
         if ($doodle) {
             return response()->json([
